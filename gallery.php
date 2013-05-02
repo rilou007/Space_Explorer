@@ -13,12 +13,13 @@
     $tab1 = array();
     $tab2 = array();
 	$tab3 = array();
+	$tab4 = array();
 	if(!isset($_POST['recherche'])){
 		$requete=$bd->Select('SELECT f.id id_file, lat, lon, url, geon, feat, description FROM files f left outer join metadata m on f.id= m.id_file ');
 	}
 	else{
 		$search_subject = strtolower($_POST['recherche']);
-		$requete=$bd->Select('SELECT f.feat, f.lat, f.lon, f.geon, f.url, f.mission, ym.year_mission, f.url, t.tags_name FROM files f LEFT JOIN metadata m ON (m.id = f.id) LEFT JOIN tags t ON (t.id = f.id) LEFT JOIN year_mission ym ON (ym.mission = f.mission) WHERE f.mission LIKE lower("%'.$search_subject.'%") or f.geon LIKE lower("%'.$search_subject.'%") OR ym.year_mission = '.intval($search_subject).' OR f.url LIKE lower("%'.$search_subject.'%") OR t.tags_name LIKE lower("%'.$search_subject.'%")');
+		$requete=$bd->Select('SELECT f.feat, f.lat, f.lon, f.geon, f.url, f.mission, ym.year_mission, f.url, t.tags_name FROM files f LEFT JOIN metadata m ON (m.id = f.id) LEFT JOIN tags t ON (t.id = f.id) LEFT JOIN year_mission ym ON (ym.mission = f.mission) WHERE f.mission LIKE lower("%'.$search_subject.'%") or f.geon LIKE lower("%'.$search_subject.'%") OR ym.year_mission = '.intval($search_subject).' OR f.url LIKE lower("%'.$search_subject.'%") OR lower(t.tags_name) LIKE lower("%'.$search_subject.'%")');
 	}
 	//$tab4 = array();
     
@@ -34,7 +35,7 @@
 					$tab1[$h] = $val['geon'];//$country;
 					$tab2[$h] = $val['feat'];//$desc;
 					$tab3[$h] = $val['description'];//for the description
-					//$tab4[$h] = $val['id_file'];// to know which specific file is concerned, so we can load related comments/tags
+					$tab4[$h] = $val['id_file'];//$tab4[$h] = $val['id_file'];// to know which specific file is concerned, so we can load related comments/tags
 					$h++;
 				}
 				$i = $i+1;
@@ -982,7 +983,7 @@
 									}
 							?>
 							<!--a href="index.php" id="register_link" class="ui-state-default ui-corner-all">HOME</a-->
-							<a href="index.php" id="login_link" style="text-decoration:none;">HOME</a>
+							<a href="index.php" id="login_link1" style="text-decoration:none;">HOME</a>
                             <a id="register_link" class="ui-state-default ui-corner-all">REGISTER</a>
 							<a href="gallery.php?stepNext=0" id="login_link1" class="ui-state-default ui-corner-all">GALLERY</a>
                             <!--a id="login_link">FRENCH</a-->
@@ -1135,7 +1136,7 @@
 											<!--for textarea-->
 											<div style="background: #e5e5e5; width: 500px; margin-left: 10px; height: 285px; margin-bottom: 10px; display: inline-block; overflow: auto; font-size: smaller;">';
 												echo '<center><img src="images/expand.png" style="cursor:pointer;" onClick="window.open(\'comments.php?id_file='.$tab4[$i].'\')" title="See all comments" /></center>';
-												$requete3=$bd->Select('SELECT comment, date_comment, username FROM comments where publish=1 and path_file="'.$tab[$i].'" ORDER by date_comment desc LIMIT 15');//SELECT lat, lon, url, geon, feat, description FROM files f left outer join metadata m on f.id= m.id_file where f.id>=12 LIMIT 12');
+												$requete3=$bd->Select('SELECT id, comment, date_comment, username FROM comments where publish=1 and path_file="'.$tab[$i].'" ORDER by date_comment desc LIMIT 15');//SELECT lat, lon, url, geon, feat, description FROM files f left outer join metadata m on f.id= m.id_file where f.id>=12 LIMIT 12');
 												foreach ($requete3 as $val3)
 												{
 													echo '
@@ -1144,7 +1145,7 @@
 														<td><span style="border: 1px solid #fff; float: left; width: 100px; height: 50px;"><b>'.$val3['username'].'</b><br /><small>'.$val3['date_comment'].'</small></span></td> 
 														<td><span style="border: 1px solid #fff; float: left; width: 300px; height: 50px;">'.$val3['comment'].'</span></td>
 														<td><span style="float: left; width: 25px; height: 50px;">
-														 <img src="images/report.png" height="25" width="25" title="Report this comment to Admin staff" style="cursor:pointer;" onClick="window.open(\'report_comments.php?idComment='.$tab4[$i].'\')" />
+														 <img src="images/report.png" height="25" width="25" title="Report this comment to Admin staff" style="cursor:pointer;" onClick="window.open(\'report_comments.php?idComment='.$val3['id'].'\')" />
 														</span></td>
 														</tr></table>
 													</div>';
@@ -1175,7 +1176,7 @@
                 </div>
             </div>
             <div id="footer">
-                  <a style="color: #fff;">Copyright ESIH 2013 | </a>  <a>Help | </a> <a href="pages/" style="text-decoration:none;"> Overview </a> | <a href="http://www.youtub.com" style="text-decoration:none;">Video</a>
+                  <a style="color: #fff;">Copyright ESIH 2013 | </a>  <a>Help | </a> <a href="pages/" style="text-decoration:none;"> Overview | </a> <a href="http://www.youtube.com/watch?v=UuJXEQFvaGY" style="text-decoration:none;" target="blank">Video</a>
             </div>
         </body>
     </html>

@@ -572,17 +572,17 @@
                             <?php
 								if(isset($_SESSION['username']))
 									{
-										?> <a href="logout.php" id="login_link1" class="ui-state-default ui-corner-all">LOGOUT</a><?php
+										?> <a href="logout.php" id="login_link1" class="ui-state-default ui-corner-all">Logout</a><?php
 									}
 								else
 									{
-										?> <a id="login_link" class="ui-state-default ui-corner-all">LOGIN</a><?php
+										?> <a id="login_link" class="ui-state-default ui-corner-all">Login</a><?php
 									}
 							?>
 							<!--a href="index.php" id="register_link" class="ui-state-default ui-corner-all">HOME</a-->
-							<a href="index.php" id="login_link" style="text-decoration:none;">HOME</a>
                             <a id="register_link" class="ui-state-default ui-corner-all">REGISTER</a>
 							<a href="gallery.php?stepNext=0" id="login_link1" class="ui-state-default ui-corner-all">GALLERY</a>
+							<a id="login_link">FRENCH</a>
                             <!--a id="login_link">FRENCH</a-->
                         </div>
                        
@@ -699,7 +699,7 @@
 											<!--for textarea-->
 											<div style="background: #e5e5e5; width: 500px; margin-left: 10px; height: 285px; margin-bottom: 10px; display: inline-block; overflow: auto; font-size: smaller;">';
 												echo '<center><img src="images/expand.png" style="cursor:pointer;" onClick="window.open(\'comments.php?id_file='.$tab4[$i].'\')" title="See all comments" /></center>';
-												$requete3=$bd->Select('SELECT comment, date_comment, username FROM comments where publish=1 and path_file="'.$tab[$i].'" ORDER by date_comment desc LIMIT 15');//SELECT lat, lon, url, geon, feat, description FROM files f left outer join metadata m on f.id= m.id_file where f.id>=12 LIMIT 12');
+												$requete3=$bd->Select('SELECT id, comment, date_comment, username FROM comments where publish=1 and path_file="'.$tab[$i].'" ORDER by date_comment desc LIMIT 15');//SELECT lat, lon, url, geon, feat, description FROM files f left outer join metadata m on f.id= m.id_file where f.id>=12 LIMIT 12');
 												foreach ($requete3 as $val3)
 												{
 													echo '
@@ -708,7 +708,7 @@
 														<td><span style="border: 1px solid #fff; float: left; width: 100px; height: 50px;"><b>'.$val3['username'].'</b><br /><small>'.$val3['date_comment'].'</small></span></td> 
 														<td><span style="border: 1px solid #fff; float: left; width: 300px; height: 50px;">'.$val3['comment'].'</span></td>
 														<td><span style="float: left; width: 25px; height: 50px;">
-														 <img src="images/report.png" height="25" width="25" title="Report this comment to Admin staff" style="cursor:pointer;" onClick="window.open(\'report_comments.php?idComment='.$tab4[$i].'\')" />
+														 <img src="images/report.png" height="25" width="25" title="Report this comment to Admin staff" style="cursor:pointer;" onClick="window.open(\'report_comments.php?idComment='.$val3['id'].'\')" />
 														</span></td>
 														</tr></table>
 													</div>';
@@ -727,7 +727,6 @@
 										</div>
 									</a>';
 								}
-								
                             ?>
 						</div>
     
@@ -739,7 +738,7 @@
                 </div>
             </div>
             <div id="footer">
-                  <a style="color: #fff;">Copyright ESIH 2013 | </a>  <a>Help | </a> <a href="pages/" style="text-decoration:none;"> Overview | </a> <a href="http://www.youtub.com" style="text-decoration:none;">Video</a>
+                  <a style="color: #fff;">Copyright ESIH 2013 | </a>  <a>Help | </a> <a href="pages/" style="text-decoration:none;"> Overview | </a> <a href="http://www.youtube.com/watch?v=UuJXEQFvaGY" style="text-decoration:none;" target="blank">Video</a>
             </div>
         </body>
     </html>
