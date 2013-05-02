@@ -97,7 +97,7 @@
 							$requete=$bd->Select('SELECT * from comments c inner join files f on url = path_file left outer join year_mission using(mission) where f.id ='.$idComment.' limit 1');//SELECT path_file from comments c where c.id ='.$idComment);
 							foreach ($requete as $val)
 							{
-								echo '<center><table style="float:right; margin-right: 100px;"><tr><td><img src="'.$val['path_file'].'" /></td></tr><tr><td valign="middle"><h5>Mission : '.
+								echo '<center><table style="float:right; margin-right: 100px;"><tr><td><a href="index.php"><h3>Back to home page</h3></a></td></tr><tr><td><img src="'.$val['path_file'].'" /></td></tr><tr><td valign="middle"><h5>Mission : '.
 								$val['mission'].' ('.$val['year_mission'].')<br />Picture of : '.$val['geon']
 								.'<br /><a href="index.php">Home page</a></td></tr></table></h5></center>
 								

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
     <html>
         <head>
-            <title>A problem with your username or password</title>
+            <title>Identifiants incorrects</title>
 			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
                <script>
 
@@ -164,15 +164,10 @@
 						<label class="for_label">PASSWORD:</label>
 						<input type="password" alt="" name="password" class="for_input"/>
 					</div>
-					<br/>
-					<input type="submit" class="for_submit" alt="" value="LOGIN"/>
+								
+                   <input type="submit" class="for_submit" alt="" value="LOGIN"/>
+					<a href="registration/account.php">Create a new account</a><br/>
 					
-					<div class="input_block">
-						<br/>
-						<a href="" title="Forgot your password">Forgot your password </a>
-						 || 
-						<a href="index.php" title="Back to the home page"> Home</a>
-					</div>
             </form>
 			</div>
             

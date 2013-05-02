@@ -37,8 +37,7 @@
 					color: #666666;
 				}
 		#head {
-		    min-height:110px;
-			max-height:120px;
+		    height: auto;
 		    border: 1px solid #e5e5e5;
 		}
                 #content {
@@ -99,12 +98,6 @@
 		});
 	    });
 	    </script>
-	    <script type="text/javascript">
-                    var YWPParams = 
-                    {
-                        autoplay: true
-                    };
-            </script>
             <!--==========END+++++++++++++++++-->
         </head>
         
@@ -138,7 +131,7 @@
 			   </ul>
 			</div>	
                 </div>
-				<fieldset style="border: none; margin-top: 5px;">
+				<fieldset>
                 <div id="content">
                    <legend> <h1>Our Team</h1></legend>
                     <div class="element">
@@ -213,7 +206,7 @@
                     </div>
 				</fieldset>
 				<br />
-				<fieldset style="border: none;">
+				<fieldset>
 					<legend><h1 class="titre">Mentors</h1></legend>
                     <div class="element">
 					<img src="img/Attie_Patrick.jpg" alt="Attie"/>
@@ -232,23 +225,17 @@
                       <a style="color:#aaa;">External relations officer</a>
                     </div>
                     
-					<div class="element">
-						<img src="img/carlos.jpg" alt="Carlos"/>
-						<h4 style="color:#282828;">Carlos Miranda Levy</h4>
-						<a style="color:#aaa;">Developer</a>
-                    </div>
-                   <!-- <div class="element">
+					<!--<div class="element">
                     
-						</div>
+                    </div>
+                    <div class="element">
+                    
+                    </div>
                     <div class="element">
                     
                     </div> -->
 				</fieldset>	
 				</div>
-				
-		<div style="width: auto; margin-top: 5px; ">
-		   <a href="http://youtu.be/UuJXEQFvaGY">The Space Explorer</a>
-		</div>
 				
             </div>
             <?php

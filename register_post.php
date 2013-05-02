@@ -99,11 +99,13 @@ $bd= new Rs();
 		}
 	catch(Exception $e)
 		{
-		?>
+		
+			 ?>
 			
-			<script> alert ("Username already exist");</script>
+			<script> alert ("Username already exist"); window.location.href='registration/account.php';</script>
+			
 			<?php
-			header('Location: registration/account.php');
+			
 			 /*echo  '<div align="center">'.'<h3>'.'<font color=red>'.("Username already exist, please give another one!!!".'</font>'.'</h3>'.'</div>');
 			 die('Erreur : '.$e->getMessage());
 			<script> </script> */

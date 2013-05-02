@@ -87,6 +87,7 @@
 		<legend align="left">
 			<a href="#adm_management"><input type="button" value="Users Management" /></a>
 			<a href="#files_management"><input type="button" value="Files Management" /></a>
+			<a href="#reported_comment"><input type="button" value="Reported Comments" /></a>
 		</legend>
 	
 			
@@ -281,7 +282,24 @@
 						}
 					?>
 				</form>
-			</div>		
+			</div>
+			
+			<hr />
+			
+			<div id="reported_comment">
+			<h3>Reported Comments</h3>
+				<form name="reported_form" method="post" action="admin.php">
+					<?php
+						$suite=array();
+						$suite=$conn->Select('SELECT * FROM comment_report INNER JOIN comments c WHERE idComment = c.id and publish=1');
+						echo '<table border="1"><tr><th>Comment</th><th>Comment Author</th><th>Report Description</th><th>Report Author</th><th>See the picture</th></tr>';
+						foreach($suite as $user)
+						{
+							echo '<tr><td>' .$user['comment'].'</td><td>'.$user['username'].'(<small>'.$user['date_comment'].'</small>)</td><td>'.$user['description'].'</td><td>'.$user['cur_user'] .'</td><td><a href="'.$user['path_file'].'" target="_blank" title="See the related picture">URL</a></td></tr>';
+						}
+					?>
+				</form>
+			</div>	
 		
 	
 	</fieldset>

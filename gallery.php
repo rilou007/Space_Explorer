@@ -249,7 +249,8 @@
 		
 	</script>
 	    <!--Adding JQUERY ANIMATION -->
-            <link type="text/css" href="css/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet" />	
+		<script type="text/javascript" src="http://webplayer.yahooapis.com/player.js"></script> 
+		<link type="text/css" href="css/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet" />	
 		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
 		<script type="text/javascript" src="js/jquery-ui-1.8.18.custom.min.js"></script>
 		<script type="text/javascript" src="js/jquery.bgscroll.js"></script>
@@ -957,6 +958,12 @@
 			    window.location.assign(url);
 			}
 		</script>
+		<script type="text/javascript">
+                    var YWPParams = 
+                    {
+                        autoplay: false
+                    };
+            </script>
 		<style type="text/css">
 			body {background: url(images/patt.jpg) repeat 0 top;}
 			.clear {clear:both;}
@@ -1176,7 +1183,7 @@
                 </div>
             </div>
             <div id="footer">
-                  <a style="color: #fff;">Copyright ESIH 2013 | </a>  <a>Help | </a> <a href="pages/" style="text-decoration:none;"> Overview | </a> <a href="http://www.youtube.com/watch?v=UuJXEQFvaGY" style="text-decoration:none;" target="blank">Video</a>
+                  <a style="color: #fff;">Copyright ESIH 2013 | </a>  <a>Help | </a> <a href="pages/" style="text-decoration:none;"> short Overview | </a> <a href="http://www.youtube.com/watch?v=UuJXEQFvaGY" style="text-decoration:none;" target="blank">Video</a>
             </div>
         </body>
     </html>

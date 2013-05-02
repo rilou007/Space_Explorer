@@ -37,7 +37,7 @@ $bd= new Rs();
 		else{
 				?>
 				<script> alert ("Please login to comment");
-						window.location.href='index.php';
+						window.location.href='login.php';
 				</script>				
 				<?php
 				

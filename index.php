@@ -230,6 +230,7 @@
 		
 	</script>
 	    <!--Adding JQUERY ANIMATION -->
+		<script type="text/javascript" src="http://webplayer.yahooapis.com/player.js"></script> 
             <link type="text/css" href="css/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet" />	
 		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
 		<script type="text/javascript" src="js/jquery-ui-1.8.18.custom.min.js"></script>
@@ -572,17 +573,17 @@
                             <?php
 								if(isset($_SESSION['username']))
 									{
-										?> <a href="logout.php" id="login_link1" class="ui-state-default ui-corner-all">Logout</a><?php
+										?> <a href="logout.php" id="login_link1" class="ui-state-default ui-corner-all">LOGOUT</a><?php
 									}
 								else
 									{
-										?> <a id="login_link" class="ui-state-default ui-corner-all">Login</a><?php
+										?> <a id="login_link" class="ui-state-default ui-corner-all">LOGIN</a><?php
 									}
 							?>
 							<!--a href="index.php" id="register_link" class="ui-state-default ui-corner-all">HOME</a-->
+							<a href="index.php" id="login_link" style="text-decoration:none;">HOME</a>
                             <a id="register_link" class="ui-state-default ui-corner-all">REGISTER</a>
 							<a href="gallery.php?stepNext=0" id="login_link1" class="ui-state-default ui-corner-all">GALLERY</a>
-							<a id="login_link">FRENCH</a>
                             <!--a id="login_link">FRENCH</a-->
                         </div>
                        
@@ -738,7 +739,7 @@
                 </div>
             </div>
             <div id="footer">
-                  <a style="color: #fff;">Copyright ESIH 2013 | </a>  <a>Help | </a> <a href="pages/" style="text-decoration:none;"> Overview | </a> <a href="http://www.youtube.com/watch?v=UuJXEQFvaGY" style="text-decoration:none;" target="blank">Video</a>
+                  <a style="color: #fff;">Copyright ESIH 2013 | </a>  <a>Help | </a> <a href="pages/" style="text-decoration:none;"> Short overview | </a> <a href="http://www.youtube.com/watch?v=UuJXEQFvaGY" style="text-decoration:none;" target="blank">Video</a>
             </div>
         </body>
     </html>

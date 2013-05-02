@@ -39,7 +39,7 @@
 	else{
 				?>
 				<script> alert ("Please login to Tag");
-						window.location.href='index.php';
+						window.location.href='login.php';
 				</script>				
 				<?php
 				

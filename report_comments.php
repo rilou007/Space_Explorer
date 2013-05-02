@@ -11,11 +11,11 @@
 		$insert[1] =  $_POST['idComment'];
 		$insert[2] =  $_POST['reason'];
 		$idComment = $_POST['idComment'];
-		//try
-		//{
+		try
+		{
 			$req = $bd->Insert('INSERT INTO comment_report (cur_user, idcomment, description) VALUES(?, ?, ?)',$insert);
-		//}
-		//catch(Exception $e){}
+		}
+		catch(Exception $e){}
 	}
 	else
 	{
@@ -112,10 +112,10 @@
 							foreach ($requete as $val)
 							{	
 								$cur_path = $val['path_file'];
-								echo '<center><table style="float:right; margin-right: 100px;"><tr><td><img src="'.$val['path_file'].'" /></td><tr></tr><td valign="middle"><h5>Mission : '.
+								echo '<center><table style="float:right; margin-right: 100px;"><tr><td><a href="index.php"><h3>Back to home page</h3></a></td></tr><tr><td><img src="'.$val['path_file'].'" /></td><tr></tr><td valign="middle"><h5>Mission : '.
 								$val['mission'].' ('.$val['year_mission'].')<br />Picture of : '.$val['geon']
-								.'<br /><a href="index.php">Home page</a></td></tr></table></h5></center><h3 class="fieldset">Comment to report:</h3><div class="fieldset"><hr />'.$val['username'].' said <br>"<i><b>'.$val['comment'].'</b></i>" on '.$val['date_comment'].'<hr /><br/><br/><h3>This comment is to be unpublished because :</h3>
-								<form method="post" action="comments.php">
+								.'<br /></td></tr></table></h5></center><h3 class="fieldset">Comment to report:</h3><div class="fieldset"><hr />'.$val['username'].' said <br>"<i><b>'.$val['comment'].'</b></i>" on '.$val['date_comment'].'<hr /><br/><br/><h3>This comment is to be unpublished because :</h3>
+								<form method="post" action="report_comments.php">
 									<table><tr>
 									<td><textarea name="reason"> </textarea></td>
 									<td><input type="hidden" name="idComment" value='.$idComment.' /></td>
