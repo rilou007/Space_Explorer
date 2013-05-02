@@ -3,8 +3,9 @@
     require_once("rs.php");
 	$bd= new Rs();
 	$h=0;
-    
-	$pictures_count = 12;
+    $s = $_GET['stepNext'];
+	$i = 0;
+	$pictures_count = 30;
 	
 	$tabLat = array();
 	$tabLon = array();
@@ -12,18 +13,32 @@
     $tab1 = array();
     $tab2 = array();
 	$tab3 = array();
-	$tab4 = array();
-    $requete=$bd->Select('SELECT f.id id_file, lat, lon, url, geon, feat, description FROM files f inner join comments c on f.url=c.path_file left outer join metadata m on f.id= m.id_file ORDER BY RAND() LIMIT '.$pictures_count);// where f.url="http://eol.jsc.nasa.gov/sseop/images/ISD/lowres/AS06/AS06-2-986.JPG"
+	if(!isset($_POST['recherche'])){
+		$requete=$bd->Select('SELECT f.id id_file, lat, lon, url, geon, feat, description FROM files f left outer join metadata m on f.id= m.id_file ');
+	}
+	else{
+		$search_subject = strtolower($_POST['recherche']);
+		$requete=$bd->Select('SELECT f.feat, f.lat, f.lon, f.geon, f.url, f.mission, ym.year_mission, f.url, t.tags_name FROM files f LEFT JOIN metadata m ON (m.id = f.id) LEFT JOIN tags t ON (t.id = f.id) LEFT JOIN year_mission ym ON (ym.mission = f.mission) WHERE f.mission LIKE lower("%'.$search_subject.'%") or f.geon LIKE lower("%'.$search_subject.'%") OR ym.year_mission = '.intval($search_subject).' OR f.url LIKE lower("%'.$search_subject.'%") OR t.tags_name LIKE lower("%'.$search_subject.'%")');
+	}
+	//$tab4 = array();
+    
 	foreach ($requete as $val)
 	{
-		$tabLon[$h] = $val['lon'];//$lon;
-		$tabLat[$h] = $val['lat'];//$lat;
-		$tab[$h] = $val['url'];//$path;
-		$tab1[$h] = $val['geon'];//$country;
-		$tab2[$h] = $val['feat'];//$desc;
-		$tab3[$h] = $val['description'];//for the description
-		$tab4[$h] = $val['id_file'];// to know which specific file is concerned, so we can load related comments/tags
-		$h++;
+		
+		if(1==1)
+			{
+				if($s <= $i and $i < $s+30){
+					$tabLon[$h] = $val['lon'];//$lon;
+					$tabLat[$h] = $val['lat'];//$lat;
+					$tab[$h] = $val['url'];//$path;
+					$tab1[$h] = $val['geon'];//$country;
+					$tab2[$h] = $val['feat'];//$desc;
+					$tab3[$h] = $val['description'];//for the description
+					//$tab4[$h] = $val['id_file'];// to know which specific file is concerned, so we can load related comments/tags
+					$h++;
+				}
+				$i = $i+1;
+			}
 	}
 	
     //This part is to select comments/tags
@@ -35,15 +50,18 @@
             <?php
 				if(isset($_SESSION['username']))
 					{
-						?><title>Hi <?php echo $_SESSION['username'];?></title><?php
+						?><title><?php echo $_SESSION['username'];?> visit the gallery</title><?php
 					}
 				else
 					{
-						?><title> Nasa space explorer </title><?php
+						?><title> Nasa space explorer gallery</title><?php
 					}
 			?>
 			
-			
+			<style type="text/css">
+				body {background: url(images/patt.jpg) repeat 0 top;}
+				.clear {clear:both;}
+			</style>
             <link rel="stylesheet" type="text/css" href="style1.css" />
             <link rel="stylesheet" type="text/css" href="style2.css" />
             <link rel="stylesheet" type="text/css" href="style1_.css" />
@@ -237,7 +255,7 @@
 		<script type="text/javascript">
 		
 			$( function() {
-				$('body').bgscroll({scrollSpeed:0.000000000001 , direction:'h' });
+				$('body').bgscroll({scrollSpeed:1 , direction:'h' });
 			});
 			
 			$(function(){
@@ -247,7 +265,6 @@
 					width: 1060,
 					height: 600,
 					resizable: true,
-					modal: true,
 					/*buttons: {
 						"Ok": function() { 
 							$(this).dialog("close"); 
@@ -270,7 +287,6 @@
 					width: 1060,
 					height: 600,
 					resizable: true,
-					modal: true,
 					/*buttons: {
 						"Ok": function() { 
 							$(this).dialog("close"); 
@@ -292,7 +308,6 @@
 					width: 1060,
                                         height: 600,
 					resizable: true,
-					modal: true,
 					/*buttons: {
 						"Ok": function() { 
 							$(this).dialog("close"); 
@@ -356,7 +371,6 @@
 					width: 1060,
                                         height: 600,
 					resizable: true,
-					modal: true,
 					/*buttons: {
 						"Ok": function() { 
 							$(this).dialog("close"); 
@@ -378,7 +392,6 @@
 					width: 1060,
                                         height: 600,
 					resizable: true,
-					modal: true,
 					/*buttons: {
 						"Ok": function() { 
 							$(this).dialog("close"); 
@@ -400,7 +413,6 @@
 					width: 1060,
                                         height: 600,
 					resizable: true,
-					modal: true,
 					/*buttons: {
 						"Ok": function() { 
 							$(this).dialog("close"); 
@@ -443,7 +455,6 @@
 					width: 1060,
                                         height: 600,
 					resizable: true,
-					modal: true,
 					/*buttons: {
 						"Ok": function() { 
 							$(this).dialog("close"); 
@@ -486,7 +497,6 @@
 					width: 1060,
                                         height: 600,
 					resizable: true,
-					modal: true,
 					/*buttons: {
 						"Ok": function() { 
 							$(this).dialog("close"); 
@@ -502,6 +512,401 @@
 					$('#dialog12').dialog('open');
 					return false;
 				});
+				
+				///// Dialog 13		
+				$('#dialog13').dialog({
+					autoOpen: false,
+					width: 1060,
+                                        height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link 13
+				$('#dialog_link13').click(function(){
+					$('#dialog13').dialog('open');
+					return false;
+				});
+				
+				///// Dialog 14			
+				$('#dialog14').dialog({
+					autoOpen: false,
+					width: 1060,
+                                        height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link 14
+				$('#dialog_link14').click(function(){
+					$('#dialog14').dialog('open');
+					return false;
+				});
+				
+				///// Dialog 15			
+				$('#dialog15').dialog({
+					autoOpen: false,
+					width: 1060,
+                                        height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link 15
+				$('#dialog_link15').click(function(){
+					$('#dialog15').dialog('open');
+					return false;
+				});
+				
+				///// Dialog 16			
+				$('#dialog16').dialog({
+					autoOpen: false,
+					width: 1060,
+                                        height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link 16
+				$('#dialog_link16').click(function(){
+					$('#dialog16').dialog('open');
+					return false;
+				});
+				
+				///// Dialog 17			
+				$('#dialog17').dialog({
+					autoOpen: false,
+					width: 1060,
+                                        height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link 17
+				$('#dialog_link17').click(function(){
+					$('#dialog17').dialog('open');
+					return false;
+				});
+				
+				///// Dialog 18			
+				$('#dialog18').dialog({
+					autoOpen: false,
+					width: 1060,
+                                        height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link 18
+				$('#dialog_link18').click(function(){
+					$('#dialog18').dialog('open');
+					return false;
+				});
+				
+				///// Dialog 19			
+				$('#dialog19').dialog({
+					autoOpen: false,
+					width: 1060,
+                                        height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link 19
+				$('#dialog_link19').click(function(){
+					$('#dialog19').dialog('open');
+					return false;
+				});
+				
+				///// Dialog 20			
+				$('#dialog20').dialog({
+					autoOpen: false,
+					width: 1060,
+                                        height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link 20
+				$('#dialog_link20').click(function(){
+					$('#dialog20').dialog('open');
+					return false;
+				});
+                                ///
+								
+				$('#dialog21').dialog({
+					autoOpen: false,
+					width: 1060,
+                                        height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link 21
+				$('#dialog_link21').click(function(){
+					$('#dialog21').dialog('open');
+					return false;
+				});
+                                ///// Dialog 22			
+				$('#dialog22').dialog({
+					autoOpen: false,
+					width: 1060,
+                                        height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link 22
+				$('#dialog_link22').click(function(){
+					$('#dialog22').dialog('open');
+					return false;
+				});
+				
+				///// Dialog 23		
+				$('#dialog23').dialog({
+					autoOpen: false,
+					width: 1060,
+                                        height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link 23
+				$('#dialog_link23').click(function(){
+					$('#dialog23').dialog('open');
+					return false;
+				});
+				
+				///// Dialog 24			
+				$('#dialog24').dialog({
+					autoOpen: false,
+					width: 1060,
+                                        height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link 24
+				$('#dialog_link24').click(function(){
+					$('#dialog24').dialog('open');
+					return false;
+				});
+				
+				///// Dialog 25			
+				$('#dialog25').dialog({
+					autoOpen: false,
+					width: 1060,
+                                        height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link 25
+				$('#dialog_link25').click(function(){
+					$('#dialog25').dialog('open');
+					return false;
+				});
+				
+				///// Dialog 26			
+				$('#dialog26').dialog({
+					autoOpen: false,
+					width: 1060,
+                                        height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link 26
+				$('#dialog_link26').click(function(){
+					$('#dialog26').dialog('open');
+					return false;
+				});
+				
+				///// Dialog 27			
+				$('#dialog27').dialog({
+					autoOpen: false,
+					width: 1060,
+                                        height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link 27
+				$('#dialog_link27').click(function(){
+					$('#dialog27').dialog('open');
+					return false;
+				});
+				
+				///// Dialog 28			
+				$('#dialog28').dialog({
+					autoOpen: false,
+					width: 1060,
+                                        height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link 28
+				$('#dialog_link28').click(function(){
+					$('#dialog28').dialog('open');
+					return false;
+				});
+				
+				///// Dialog 29			
+				$('#dialog29').dialog({
+					autoOpen: false,
+					width: 1060,
+                                        height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link 29
+				$('#dialog_link29').click(function(){
+					$('#dialog29').dialog('open');
+					return false;
+				});
+				
+				///// Dialog 30			
+				$('#dialog30').dialog({
+					autoOpen: false,
+					width: 1060,
+                                        height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link 30
+				$('#dialog_link30').click(function(){
+					$('#dialog30').dialog('open');
+					return false;
+				});
                                 ///
                                 
                                 ///Login
@@ -510,7 +915,6 @@
 					autoOpen: false,
 					width: 525,
 					resizable: false,
-					modal: true,
 					/*buttons: {
 						"Ok": function() { 
 							$(this).dialog("close"); 
@@ -531,7 +935,6 @@
 					autoOpen: false,
 					width: 500,
 					resizable: true,
-					modal: true,
 					/*buttons: {
 						"Ok": function() { 
 							$(this).dialog("close"); 
@@ -550,26 +953,25 @@
 			
 			function see_map(lat,lon,feat) {
 				var url = 'map.php?lat='+lat+'&lon='+lon+'&feat='+feat;
-			    window.open(url,"_blank");
+			    window.location.assign(url);
 			}
 		</script>
 		<style type="text/css">
-			body {background: url(images/patt.jpg) repeat 0 top fixed;}
+			body {background: url(images/patt.jpg) repeat 0 top;}
 			.clear {clear:both;}
 		</style>
         </head>
-        <body>
-		<?php include("api.php");?>
+        <?php include("api.php");?>
             <div id="global">
                 <div id="top_bar_head">
                     <div class="name_container">
-                        <a href=""><img src="img/g3969.png" alt="logo" style="width: 145px; height: 100px;float: left; margin-right: 5px; margin-top:5px;" /></a>
-                        <br/><br/><a style="font-size: 25px; font-weight: bold; "><h2>Space Explorer</h2></a>
+                        <img src="img/g3969.png" alt="logo" style="width: 145px; height: 100px;float: left; margin-right: 5px; margin-top:5px;" />
+                        <br/><br/><a style="font-size: 25px; font-weight: bold; "><h2>Space Explorer Gallery</h2></a>
                     </div>
 
                     <div class="search_container">
                         <div class="block_registrer">
-                            <?php
+                           <?php
 								if(isset($_SESSION['username']))
 									{
 										?> <a href="logout.php" id="login_link1" class="ui-state-default ui-corner-all">LOGOUT</a><?php
@@ -639,10 +1041,10 @@
 							</form>
 							
 							<?php 
-								if (isset($_POST['search_']))// and isset($_POST['recherche']))
-								{
-									header('Location: search/gallerie.php');//?search_subject='.$_POST['search_']);
-								}
+								//if (isset($_POST['search_']))// and isset($_POST['recherche']))
+								//{
+									//header('Location: search/gallerie.php');//?search_subject='.$_POST['search_']);
+								//}
 							?>
 						</div>
                         
@@ -657,6 +1059,40 @@
                     <div id="left_pane">
                         <div class="block">
                             <?php 
+								
+								if($i>$s+30 and !$s+30>30){
+									?>
+										<table class="suite">
+											<tr>
+												<td><a href="gallery.php?stepNext=<?php echo $s+30;?>"><img src="images/amis_D.png" title=""/></a></td>
+											</tr>
+										</table>
+										
+									<?php
+								}
+								if($i>$s+30 and $s+30>30){
+									?>
+										<table class="suite">
+											<tr>
+												<td><a href="gallery.php?stepNext=<?php echo $s-30;?>"><img src="images/amis_G.png" title=""/></a>
+													<a href="gallery.php?stepNext=<?php echo $s+30;?>"><img src="images/amis_D.png" title=""/></a></td>
+											</tr>
+										</table>
+										
+									<?php
+								}
+								if($s>0 and $i<$s+30){
+									?>
+										<table class="suite">
+											<tr>
+												<td><a href="gallery.php?stepNext=<?php echo $s-30;?>"><img src="images/amis_G.png" title=""/></a></td>
+											</tr>
+										</table>
+										
+									<?php
+								}
+	
+								
 								for($i=0;$i<$pictures_count;$i++)
 								{
 									echo '
@@ -727,9 +1163,10 @@
 										</div>
 									</a>';
 								}
+								
                             ?>
 						</div>
-    
+					<br/><br/>
 					</div>
                     
                     <!--<div id="right_pane">

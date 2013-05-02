@@ -7,8 +7,8 @@ a { color: #fff; opacity: 1; margin: 0;}
 body {
     margin: 0;
     padding: 0;
-    background: url(img/images.jpg) no-repeat center top fixed;
-    background-size: 100%;
+    /*background: url(img/images.jpg) no-repeat center top fixed;*/
+    /*background-size: 100%;*/
     font-size: small;
     font-family:tahoma, geneva, sans-serif;
     
@@ -60,9 +60,10 @@ body {
 .blow {
     width: 333px;
     height: 200px;
-    -webkit-box-shadow: 0 0 5px #e5e5e5;
+    border: 1px solid #666666;
+    /*-webkit-box-shadow: 0 0 5px #e5e5e5;
     -moz-box-shadow: 0 0 5px #e5e5e5;
-    box-shadow: 0 0 5px #e5e5e5;
+    box-shadow: 0 0 5px #e5e5e5;*/
     /*border-width: 1px;
     border-style: solid;
     border-color: #e5e5e5 #d8d8d8 #b2b2b2;*/
@@ -156,6 +157,10 @@ body {
         color: #23441e;
 
         text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+}
+
+.suite{
+	margin:auto;
 }
 
 #submit:hover
@@ -255,6 +260,34 @@ h2 {
 }*/
 /* ==========******END OF CONTENT **********============*/
 
+#share
+{
+padding:250px 0 0 0;
+position:fixed;
+top:10;
+}
+#share ul a
+{
+display:block;
+}
+#fb-root
+{
+display:block;
+}
+.fb-like
+{
+display:block;
+}
+.twitter-share-button
+{
+display:block;
+}
+
+.form_add_comment {
+    margin-bottom: 2px; 
+    width: 100%; 
+    min-height: 50px;
+}
 #footer {
     width: 100%;
     min-height: 30px;

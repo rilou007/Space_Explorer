@@ -1,6 +1,4 @@
-<?php require_once("rs.php");
-
-$bd= new Rs();
+<?php
 // Déclaration de l'adresse de destination.
 					$mail = $_POST['email'];
 					if (!preg_match("#^[a-z0-9._-]+@(yahoo|gmail|hotmail|live|msn).[a-z]{2,4}$#", $mail)) // On filtre les serveurs qui rencontrent des bogues.
@@ -20,19 +18,19 @@ $bd= new Rs();
 					</head>
 					<body>
 					
-					<h3>Welcome on NASA SPACE EXPLORER,</h3>
+					<h3>Salut et bienvenue sur NASA SPACE EXPLORER,</h3>
 					
 					</br> 
 					
-					<p>You have been successfuly register on NASA Space Explorer... To go back, <a href='http://nasa.logipam.org'>Click here!</a>.</p>
+					<p>Nous venons tout juste de recevoir votre demande d'inscription et votre demande a été agréée avec plaisir. Vous pouvez retouner sur NASA SPACE EXPLORER en cliquant sur: <a href='http://nasa.logipam.org'>Retour sur la NSE </a>.</p>
 					
 					<p></br></br></p> 
 					
-					<h3>We are waiting for your there!</h3>
+					<h3>Alors on se revoit là bas alors…</h3>
 					
 					<p></br></br></p>
 					
-					<h3>Let's go...</h3>
+					<h3>Allez! On vous attend...</h3>
 					</body>
 					</html>
 					";
@@ -71,26 +69,26 @@ $bd= new Rs();
 					//==========
  
 					//=====Envoi de l'e-mail.
-					//mail($mail,$sujet,$message,$header);  
+					mail($mail,$sujet,$message,$header);
 					
-	if($_POST['password']==$_POST['cpassword'])
-	{
-	
 	try
 		{
-				
-			$insert = array();
-			$insert[0] =  $_POST['userName'];
-			$insert[1] =  $_POST['email'];
-			$insert[2] =  md5($_POST['password']);
-			$insert[3] =  "non-adm";
+			$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+			$bdd = new PDO('mysql:host=localhost;dbname=logipamo_nasa','logipamo_esih','esih007',$pdo_options);
+			
+			$userName = $_POST['userName'];
+			
+			$email = $_POST['email'];
+			
+			$password = $_POST['password'];
+			
+			$type = "non-adm";
+			
+			$req = $bdd->prepare('INSERT INTO users (username, email, password, type) VALUES(?, ?, ?, ?)');
+			$req->execute(array($userName, $email, $password, $type));
 			
 			
-			$req = $bd->Insert('INSERT INTO users (username, email, password, type, blocked) VALUES(?, ?, ?, ?,"0")',$insert);
-			/* $req->execute(array($userName, $email, $password, $type)); */
-			
-			
-			header('Location: felicitation.php');
+			header('Location: index.php');
 			
 			mail($mail,$sujet,$message,$header);
 			
@@ -99,22 +97,6 @@ $bd= new Rs();
 		}
 	catch(Exception $e)
 		{
-		?>
-			
-			<script> alert ("Username already exist");</script>
-			<?php
-			header('Location: registration/account.php');
-			 /*echo  '<div align="center">'.'<h3>'.'<font color=red>'.("Username already exist, please give another one!!!".'</font>'.'</h3>'.'</div>');
-			 die('Erreur : '.$e->getMessage());
-			<script> </script> */
+			die('Erreur : '.$e->getMessage());
 		}
-		
-	}
-	else
-					{
-						?>
-							<script> alert("Password not matched"); </script> 
-						<?php
-						
-					}
 ?>

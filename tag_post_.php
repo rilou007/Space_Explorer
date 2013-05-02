@@ -3,9 +3,6 @@
 	$bd = new Rs();
 	session_start();
 	// Connexion a  la base de donnees
-	if(isset($_SESSION['username']) != null)
-	{
-	
 	try
 		{
 			/* $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
@@ -32,18 +29,6 @@
 	catch(Exception $e)
 		{
 			die('Erreur : '.$e->getMessage());
-		}
-		
-	}
-	
-	else{
-				?>
-				<script> alert ("Please login to Tag");
-						window.location.href='index.php';
-				</script>				
-				<?php
-				
-				
 		}
 			
 ?>

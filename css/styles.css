@@ -1,0 +1,134 @@
+/* CSS Document Designed by L. Giscard AUGUSTIN */
+
+input{
+	margin-left: 20px;
+}
+.tab{
+	/*(border:2px solid red; */
+	width: 98%;
+}
+body{
+	width: 400px;
+	margin: auto;
+}
+fieldset {
+/*	<!--align=center;*/
+	border:4px groove rgba(255, 0, 0, 0.1); 
+	margin-top:30px; 
+	width: 600px; 
+	margin: auto;
+	background-color: rgba(0, 0, 255, .1);
+}
+h3{
+color: #333333;
+text-decoration:underline;
+}
+
+fieldset
+{
+	margin:auto;
+	font-family: MoolBoran;
+	font-size:24px;
+	color:#000000;
+	border-radius:20px;
+}
+
+legend
+{
+	color: #0000FF;#FF8900;
+}
+
+#main_body{
+	width: 500px;
+}
+
+
+#loging
+{
+	margin:auto;
+	border-radius:20px;
+	display: block;
+	width:300px;
+	background-repeat:no-repeat;
+	background-position: right;
+	margin-top:75px;
+	background-image: url(../images/login.png);
+}
+
+
+/*for the menu*/
+
+.halfmoon{
+margin-bottom: 1em;
+}
+
+.halfmoon ul{
+padding: 3px 9px 2px 5px;
+margin-left: 0;
+margin-top: 1px;
+margin-bottom: 0;
+font: bold 12px Verdana;
+list-style-type: none;
+text-align: left; /*set to left, center, or right to align the menu as desired*/
+border-bottom: 1px solid #929492;
+}
+
+.halfmoon li{
+display: inline;
+margin: 0;
+}
+
+.halfmoon li a{
+text-decoration: none;
+padding: 3px 9px 2px 5px;
+margin: 0;
+margin-right: 1px; /*distance between each tab*/
+border-left: 1px solid gray;
+color: black;
+font-size: 13px;
+background: #e5febc url(media/halfmoontab.gif) top right no-repeat;
+}
+
+.halfmoon li a:visited{
+color: black;
+}
+
+.halfmoon li a:hover, .halfmoon li.selected a{
+background-color: #c8e181;
+}
+
+
+/* ######### Style for Drop Down Menu ######### */
+
+.dropmenudiv_e{
+position:absolute;
+top: 0;
+border: 1px solid #657f27; /*THEME CHANGE HERE*/
+border-width: 0 1px;
+font:normal 12px Verdana;
+line-height:18px;
+z-index:100;
+background-color: #eff8d2;
+width: 200px;
+visibility: hidden;
+}
+
+
+.dropmenudiv_e a{
+width: auto;
+display: block;
+text-indent: 5px;
+border: 0 solid #657f27; /*THEME CHANGE HERE*/
+border-bottom-width: 1px;
+padding: 2px 0;
+text-decoration: none;
+color: black;
+}
+
+* html .dropmenudiv_e a{ /*IE only hack*/
+width: 100%;
+}
+
+.dropmenudiv_e a:hover{ /*THEME CHANGE HERE*/
+background-color: #c8e181;
+}
