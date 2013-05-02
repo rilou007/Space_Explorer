@@ -1175,7 +1175,7 @@
                 </div>
             </div>
             <div id="footer">
-                  <a style="color: #fff;">Copyright ESIH 2013 | </a>  <a>Help | </a> <a href="pages/"> About us</a>
+                  <a style="color: #fff;">Copyright ESIH 2013 | </a>  <a>Help | </a> <a href="pages/" style="text-decoration:none;"> Overview </a> | <a href="http://www.youtub.com" style="text-decoration:none;">Video</a>
             </div>
         </body>
     </html>
